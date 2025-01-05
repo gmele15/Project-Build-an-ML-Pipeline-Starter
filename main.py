@@ -88,6 +88,7 @@ def go(config: DictConfig):
             _ = mlflow.run(
                 f"{config['main']['components_repository']}/train_val_test_split",
                 'main',
+                version='main',
                 env_manager="conda",
                 parameters={
                     "input": "clean_sample.csv:latest",
@@ -107,9 +108,6 @@ def go(config: DictConfig):
             # NOTE: use the rf_config we just created as the rf_config parameter for the train_random_forest
             # step
 
-            ##################
-            # Implement here #
-            ##################
             _ = mlflow.run(
                 os.path.join(root_dir, "src", "train_random_forest"),
                 "main",
@@ -125,15 +123,19 @@ def go(config: DictConfig):
                 },
             )
 
-            pass
-
         if "test_regression_model" in active_steps:
 
-            ##################
-            # Implement here #
-            ##################
-
-            pass
+            # Run the test regression model
+            _ = mlflow.run(
+                f"{config['main']['components_repository']}/test_regression_model",
+                "main",
+                version='main',
+                env_manager="conda",
+                parameters={
+                    "mlflow_model": "random_forest_export:prod",
+                    "test_dataset": "test_data.csv:latest",
+                },
+            )
 
 
 if __name__ == "__main__":
