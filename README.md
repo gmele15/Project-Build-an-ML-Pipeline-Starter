@@ -1,4 +1,5 @@
 [Weight and Biases Public Project](https://wandb.ai/gmele15-western-governors-university/nyc_airbnb?nw=nwusergmele15)
+
 [Github Public Repo](https://github.com/gmele15/Project-Build-an-ML-Pipeline-Starter/)
 
 # Build an ML Pipeline for Short-Term Rental Prices in NYC
